@@ -1,0 +1,274 @@
+\usepackage[dvipsnames]{xcolor}
+
+\usepackage{contour}
+\contourlength{0.25mm}
+\contournumber{1024}
+
+\usepackage{tikz}
+\usetikzlibrary{math}
+\usetikzlibrary{shapes}
+\usetikzlibrary{calc}
+
+\usepackage{calc}
+\usepackage{fontspec}
+
+\usepackage{booktabs}
+\usepackage{enumitem}
+
+\newlength{\cardwidth}
+\newlength{\cardheight}
+\newlength{\bleed}
+\newlength{\horizspace}
+\newlength{\vertspace}
+\newlength{\vertdist}
+\newlength{\horizdist}
+
+\setlength{\cardwidth}{2.5in}
+\setlength{\cardheight}{3.5in}
+\setlength{\bleed}{0.0625in}
+\setlength{\horizspace}{0.0625in}
+\setlength{\horizdist}{\cardwidth + 2\bleed + \horizspace}
+\setlength{\vertspace}{0.0625in}
+\setlength{\vertdist}{\cardheight + 2\bleed + \vertspace}
+
+\definecolor{bandana}{HTML}{D41e25}
+
+\newcommand{\goldtext}{
+Score two points for each stack of gold coins you have at the end of the game.
+}
+
+\newcommand{\rumtext}{
+Score a number of points based on how many bottles of rum you have at the end of the game.\\[1.5ex] \rumtable
+}
+
+\newcommand{\rumtable}{
+\begin{tabular}{llllll}
+Bottles & 0 & 1 & 2 & 3 & 4+ \\ \midrule
+Points & 0 & 1 & 4 & 9 & 0
+\end{tabular}}
+
+\newcommand{\emeraldtext}{
+Score five points if you have the most emeralds at the end of the game.
+}
+
+\newcommand{\rubytext}{
+Score five points if you have the most rubies at the end of the game.
+}
+
+\newcommand{\sapphiretext}{
+Score five points if you have the most sapphires at the end of the game.
+}
+
+\newcommand{\pistoltext}{
+You may discard a pistol at any time to steal one\\treasure from another character.
+}
+
+\newcommand{\messagetext}{
+Double the point value of one treasure map (limit one message in a bottle per treasure map).
+}
+
+\newcommand{\maptext}{
+Score two points for each treasure map you have at the end of the game.
+}
+
+\newcommand{\compasstext}{
+Double the point value of one treasure map (limit one compass per treasure map).
+}
+
+\newcommand{\spyglasstext}{
+Double the point value of one treasure map (limit one spyglass per treasure map).
+}
+
+\newcommand{\skulltext}{
+After each round, give one random treasure to another character.\\[1ex]Score five points if you have the\\cursed~skull~at~the~end~of~the~game.
+}
+
+\newcommand{\spottext}{
+After each round, steal one random treasure from another character.\\[1ex]Lose five points if you have the black spot at~the end of the game.
+}
+
+\newcommand{\parrottext}{
+After each round, the parrot steals one of bottle of rum from you.\\[1ex]Then, if any characters have more bottles of rum than you,\\give the parrot to one of them.
+}
+
+\newcommand{\barreltext}{
+You may discard a barrel at any time to draw a random\\secret treasure card. 
+}
+
+\newcommand{\captaintext}{
+You are the captain.\\[1ex]Each round, allocate shares to all characters before voting.
+}
+
+\tikzset{red_gem/.pic={
+	\node at (0,0) {\includegraphics[height=1.75in]{Images/red_gem.png}};
+}}
+
+\tikzset{black_gem/.pic={
+	\node at (0,0) {\includegraphics[height=1.75in]{Images/black_gem.png}};
+}}
+
+\tikzset{blue_gem/.pic={
+	\node at (0,0) {\includegraphics[height=1.75in]{Images/blue_gem2.png}};
+}}
+
+\tikzset{green_gem/.pic={
+	\node at (0,0) {\includegraphics[height=1.75in]{Images/green_gem2.png}};
+}}
+
+\tikzset{yellow_gem/.pic={
+	\node at (0,0) {\includegraphics[height=1.75in]{Images/yellow_gem.png}};
+}}
+
+\tikzset{purple_gem/.pic={
+	\node at (0,0) {\includegraphics[height=1.75in]{Images/purple_gem.png}};
+}}
+
+\tikzset{orange_gem/.pic={
+	\node at (0,0) {\includegraphics[height=1.75in]{Images/orange_gem2.png}};
+}}
+
+
+\tikzset{cardbackpattern/.pic={
+	\foreach \i in {-1.25in, -1.0in, -0.75in, -0.5in, -0.25in, 0in, 0.25in, 0.5in, 0.75in, 1.0in, 1.25in}
+		\foreach \j in {-1.75in, -1.5in, -1.25in, -1.0in, -0.75in, -0.5in, -0.25in, 0in, 0.25in, 0.5in, 0.75in, 1.0in, 1.25in, 1.5in, 1.75in}
+			\draw[ultra thick, black] (\i,\j) circle (0.105in);
+
+	\foreach \i in {-1.375in, -1.125in, -0.875in,-0.625in, -0.375in, -0.125in, 0.125in, 0.375in, 0.625in, 0.875in, 1.125in, 1.375in}
+		\foreach \j in {-1.875in, -1.625in, -1.375in, -1.125in, -0.875in, -0.625in, -0.375in, -0.125in, 0.125in, 0.375in, 0.625in, 0.875in, 1.125in, 1.375in, 1.625in, 1.875in}
+			\draw[ultra thick, black] (\i,\j) circle (0.105in);
+			
+	\foreach \i in {-1.25in, -1.0in, -0.75in, -0.5in, -0.25in, 0in, 0.25in, 0.5in, 0.75in, 1.0in, 1.25in}
+		\foreach \j in {-1.75in, -1.5in, -1.25in, -1.0in, -0.75in, -0.5in, -0.25in, 0in, 0.25in, 0.5in, 0.75in, 1.0in, 1.25in, 1.5in, 1.75in}
+			\draw[thick, #1] (\i,\j) circle (0.105in);
+
+	\foreach \i in {-1.375in, -1.125in, -0.875in,-0.625in, -0.375in, -0.125in, 0.125in, 0.375in, 0.625in, 0.875in, 1.125in, 1.375in}
+		\foreach \j in {-1.875in, -1.625in, -1.375in, -1.125in, -0.875in, -0.625in, -0.375in, -0.125in, 0.125in, 0.375in, 0.625in, 0.875in, 1.125in, 1.375in, 1.625in, 1.875in}
+			\draw[thick, #1] (\i,\j) circle (0.105in);
+}}
+
+
+\tikzset{guidecross/.pic={
+	\draw[#1] (-\bleed,0) -- (\bleed,0);
+	\draw[#1] (0, -\bleed) -- (0, \bleed);
+}}
+
+\tikzset{cutguide/.pic={
+	\pic () at (-\cardwidth/2, \cardheight/2) {guidecross={#1}};
+	\pic () at (\cardwidth/2, \cardheight/2) {guidecross={#1}};
+	\pic () at (-\cardwidth/2, -\cardheight/2) {guidecross={#1}};
+	\pic () at (\cardwidth/2, -\cardheight/2) {guidecross={#1}};
+}}
+
+
+\tikzset{cardoutlinedisplay/.pic={%
+		\begin{scope}
+		\clip[rounded corners=3mm] (-\cardwidth/2, 0in) --%
+		      (-\cardwidth/2, \cardheight/2) --%
+		      (\cardwidth/2, \cardheight/2) --%
+		      (\cardwidth/2, -\cardheight/2) --%
+		      (-\cardwidth/2, -\cardheight/2) --%
+		      cycle;
+		\path[draw, line width=1.5mm, rounded corners=3mm, fill=#1] (-\cardwidth/2, 0in) --%
+		      (-\cardwidth/2, \cardheight/2) --%
+		      (\cardwidth/2, \cardheight/2) --%
+		      (\cardwidth/2, -\cardheight/2) --%
+		      (-\cardwidth/2, -\cardheight/2) --%
+		      cycle;
+		\end{scope}
+}}
+
+\tikzset{blankcard/.pic={
+	\begin{scope}
+	\clip (-\cardwidth/2 - \bleed, 0in) --%
+	      (-\cardwidth/2 - \bleed, \cardheight/2 + \bleed) --%
+	      (\cardwidth/2 + \bleed, \cardheight/2 + \bleed) --%
+	      (\cardwidth/2 + \bleed, -\cardheight/2 - \bleed) --%
+	      (-\cardwidth/2 - \bleed, -\cardheight/2 - \bleed) --%
+	      cycle;
+	\path[fill=#1] (-\cardwidth/2 - \bleed, 0in) --%
+	      (-\cardwidth/2 - \bleed, \cardheight/2 + \bleed) --%
+	      (\cardwidth/2 + \bleed, \cardheight/2 + \bleed) --%
+	      (\cardwidth/2 + \bleed, -\cardheight/2 - \bleed) --%
+	      (-\cardwidth/2 - \bleed, -\cardheight/2 - \bleed) --%
+	      cycle;
+	\node[minimum height=3.5in, minimum width=2.5in, fill=white] at (0,0) {};
+\end{scope}
+
+}}
+
+
+
+\tikzset{pics/charactercard/.style n args={4}{%
+	code={
+		\begin{scope}
+		\clip (-\cardwidth/2 - \bleed, 0in) --%
+		      (-\cardwidth/2 - \bleed, \cardheight/2 + \bleed) --%
+		      (\cardwidth/2 + \bleed, \cardheight/2 + \bleed) --%
+		      (\cardwidth/2 + \bleed, -\cardheight/2 - \bleed) --%
+		      (-\cardwidth/2 - \bleed, -\cardheight/2 - \bleed) --%
+		      cycle;
+		\path[fill=white] (-\cardwidth/2 - \bleed, 0in) --%
+		      (-\cardwidth/2 - \bleed, \cardheight/2 + \bleed) --%
+		      (\cardwidth/2 + \bleed, \cardheight/2 + \bleed) --%
+		      (\cardwidth/2 + \bleed, -\cardheight/2 - \bleed) --%
+		      (-\cardwidth/2 - \bleed, -\cardheight/2 - \bleed) --%
+		      cycle;
+
+		% Pattern for card front
+%		\node[draw, minimum width=2.5in, minimum height=3.5in, inner sep=0pt] at (0,0) {};
+		\node at (-1in, 1.5in) {{\Huge \textbf{#3}}};
+		\node[inner sep=0pt, anchor=south] () at (0,-0.8in) {\includegraphics[scale=0.125]{Images/#1}};
+		\node[draw, ultra thick, rounded corners=3mm, anchor=south, minimum height=0.675in, minimum width=2.25in, text width=2.0in, align=center] () at (0,-1.625in) {#2};
+	
+		\end{scope}
+		% Cutting guides for corners of the cards	
+		\pic () at (0,0) {cutguide={#4}};
+}}}
+
+
+\tikzset{pics/lootcard/.style n args={3}{%
+	code={
+		\begin{scope}
+		\clip (-\cardwidth/2 - \bleed, 0in) --%
+		      (-\cardwidth/2 - \bleed, \cardheight/2 + \bleed) --%
+		      (\cardwidth/2 + \bleed, \cardheight/2 + \bleed) --%
+		      (\cardwidth/2 + \bleed, -\cardheight/2 - \bleed) --%
+		      (-\cardwidth/2 - \bleed, -\cardheight/2 - \bleed) --%
+		      cycle;
+		\path[fill=white] (-\cardwidth/2 - \bleed, 0in) --%
+		      (-\cardwidth/2 - \bleed, \cardheight/2 + \bleed) --%
+		      (\cardwidth/2 + \bleed, \cardheight/2 + \bleed) --%
+		      (\cardwidth/2 + \bleed, -\cardheight/2 - \bleed) --%
+		      (-\cardwidth/2 - \bleed, -\cardheight/2 - \bleed) --%
+		      cycle;
+
+		% Pattern for card front
+		\node[inner sep=0pt] () at (0,0.5in) {\includegraphics[scale=0.25]{Images/#1}};
+		\node[draw, ultra thick, rounded corners=3mm, anchor=south, minimum height=0.675in, minimum width=2.25in, text width=2.0in, align=center] () at (0,-1.625in) {#2};
+	
+		\end{scope}
+		% Cutting guides for corners of the cards	
+		\pic () at (0,0) {cutguide={#3}};
+}}}
+
+\tikzset{pics/uniformcard/.style n args={2}{
+	code={
+	\begin{scope}
+	\clip (-\cardwidth/2 - \bleed, 0in) --%
+	      (-\cardwidth/2 - \bleed, \cardheight/2 + \bleed) --%
+	      (\cardwidth/2 + \bleed, \cardheight/2 + \bleed) --%
+	      (\cardwidth/2 + \bleed, -\cardheight/2 - \bleed) --%
+	      (-\cardwidth/2 - \bleed, -\cardheight/2 - \bleed) --%
+	      cycle;
+	% Pattern for card back
+	\path[fill=#1] (-\cardwidth/2 - \bleed, 0in) --%
+	      (-\cardwidth/2 - \bleed, \cardheight/2 + \bleed) --%
+	      (\cardwidth/2 + \bleed, \cardheight/2 + \bleed) --%
+	      (\cardwidth/2 + \bleed, -\cardheight/2 - \bleed) --%
+	      (-\cardwidth/2 - \bleed, -\cardheight/2 - \bleed) --%
+	      cycle;
+	\pic () at (0,0) {cardbackpattern={#2}};
+	% Cutting guides for corners of the cards	
+%	\pic () at (0,0) {cutguide={#2}};
+\end{scope}
+}}}

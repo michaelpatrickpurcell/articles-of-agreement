@@ -1,0 +1,49 @@
+\documentclass{standalone}
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+
+\usepackage{fontspec}
+%\setmainfont[Scale=2.25]{Risque}
+%\setmainfont[Scale=2]{Walter Turncoat}
+%\setmainfont[Scale=2]{Berkshire Swash}
+%\setmainfont[Scale=2.5]{Unifraktur Cook}
+\setmainfont[Scale=1.75]{Cinzel Decorative-Bold}
+\setmainfont[Scale=2]{Merienda-Extra Bold}
+
+\usepackage[letterspace=75]{microtype}
+\usepackage{contour}
+\contourlength{1pt}
+
+\definecolor{bone}{HTML}{FFF5CE}
+%\definecolor{bandana}{HTML}{AA2D27}
+\definecolor{bandana}{HTML}{D41e25}
+
+%\pagecolor{black!95}
+\color{bandana}
+\begin{document}
+\Huge
+\begin{tikzpicture}
+\path (-6.3cm, -5cm) -- (6.3cm, 5cm);
+%\node[inner sep=0pt, fill=white, minimum width=12.6cm, minimum height=10cm] at (0,0) {};
+%\node[opacity=0.5, inner sep=0pt] at (0,0) {\includegraphics[width=12.6cm, height=10cm]{Images/parchment_texture_small.jpg}};
+
+%\node[inner sep=0pt] at (0,3.75cm) {\contour{black}{\textls{Articles\,\,of}}};
+%\node[inner sep=0pt] at (0,-3.9cm) {\contour{black}{\textls{Agreement}}};
+\node[inner sep=0pt] at (0,3.8cm) {\textls{Articles\,\,of}};
+\node[inner sep=0pt] at (0,-3.8cm) {\textls{Agreement}};
+
+%\node[inner sep=0pt] at (0,-0.15cm) {\includegraphics[height=5.5cm]{Images/skull-and-crossbones.png}};
+%\node[inner sep=0pt] at (0,-0.1cm) {\includegraphics[height=5.5cm]{Images/pirate-ship.png}};
+
+\node[inner sep=0pt, anchor=south] at (0.25cm,-2.55cm) {\includegraphics[scale=0.11]{Images/pirate-1.png}};
+\node[inner sep=0pt, anchor=south] at (3.875cm,-2.55cm) {\includegraphics[scale=0.11]{Images/pirate-2.png}};
+%\node[inner sep=0pt] at (0,-0.1cm) {\includegraphics[height=5.5cm]{Images/pirate-3.png}};
+%\node[inner sep=0pt] at (0,-0.1cm) {\includegraphics[height=5.5cm]{Images/pirate-4.png}};
+%\node[inner sep=0pt] at (0,-0.1cm) {\includegraphics[height=5.5cm]{Images/pirate-5.png}};
+%\node[inner sep=0pt] at (0,-0.1cm) {\includegraphics[height=5.5cm]{Images/pirate-2.png}};
+\node[inner sep=0pt, anchor=south] at (-3.875cm,-2.55cm) {\includegraphics[scale=0.11]{Images/pirate-7b.png}};
+
+
+\end{tikzpicture}
+\end{document}

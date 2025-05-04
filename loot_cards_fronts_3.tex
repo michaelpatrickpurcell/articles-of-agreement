@@ -1,0 +1,22 @@
+\documentclass{standalone}
+
+\usepackage{aoa}
+\setmainfont{Caslon Antique}
+
+\begin{document}
+\begin{tikzpicture}
+\large
+\path (-105mm, -148.5mm) -- (105mm, 148.5mm);
+\pic at (-\horizdist,\vertdist) {lootcard={bottle-of-rum}{\rumtext}{black}};
+\pic at (0\horizdist,\vertdist) {lootcard={bottle-of-rum}{\rumtext}{black}};
+\pic at (\horizdist,\vertdist) {lootcard={bottle-of-rum}{\rumtext}{black}};
+
+\pic at (-\horizdist,0\vertdist) {lootcard={bottle-of-rum}{\rumtext}{black}};
+\pic at (0\horizdist,0\vertdist) {lootcard={bottle-of-rum}{\rumtext}{black}};
+\pic at (\horizdist,0\vertdist) {lootcard={bottle-of-rum}{\rumtext}{black}};
+
+\pic at (-\horizdist,-\vertdist) {lootcard={bottle-of-rum}{\rumtext}{black}};
+\pic at (0\horizdist,-\vertdist) {lootcard={bottle-of-rum}{\rumtext}{black}};
+\pic at (\horizdist,-\vertdist) {lootcard={bottle-of-rum}{\rumtext}{black}};
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,22 @@
+\documentclass{standalone}
+
+\usepackage{aoa}
+
+\begin{document}
+\begin{tikzpicture}
+\Huge
+\path (-105mm, -148.5mm) -- (105mm, 148.5mm);
+\pic at (\horizdist,\vertdist) {uniformcard={RoyalBlue}{white}};
+\pic at (0,\vertdist) {uniformcard={RoyalBlue}{white}};
+\pic at (-\horizdist,\vertdist) {uniformcard={RoyalBlue}{white}};
+
+\pic at (\horizdist,0) {uniformcard={RoyalBlue}{white}};
+\pic at (0,0) {uniformcard={RoyalBlue}{white}};
+\pic at (-\horizdist,0) {uniformcard={RoyalBlue}{white}};
+
+\pic at (\horizdist,-\vertdist) {uniformcard={Red}{white}};
+\pic at (0,-\vertdist) {uniformcard={RoyalBlue}{white}};
+\pic at (-\horizdist,-\vertdist) {uniformcard={white}{white}};
+
+\end{tikzpicture}
+\end{document}
