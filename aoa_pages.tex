@@ -1,0 +1,90 @@
+\documentclass[a6paper, parskip=half, DIV=14, 12pt]{scrartcl}
+
+\usepackage{aoa}
+
+\usepackage{aoarules}
+
+
+\begin{document}
+{%
+\thispagestyle{empty}
+		\enlargethispage{3.5\baselineskip} % Move the bottom line (author and date) down a bit
+\setmainfont[Scale=1.0]{Caslon Antique}
+\begin{center}
+\makeatletter
+{Version \@version}
+\makeatother
+
+
+\vfill
+
+{
+\setmainfont[Scale=1.7]{Tradewinds}
+\Huge
+\textcolor{bandana}{Articles\hfill of\\Agreement}
+}
+
+\vspace{-0.5cm}
+
+\tikz{\node[inner sep=0pt] {\includegraphics[height=8cm]{Images/pirate-ship-small.png}};}
+
+\vfill{}
+
+{
+\setmainfont{Aquiline Two}
+\Large
+\textcolor{bandana}{Designed by Michael Purcell}
+}
+\end{center}
+}
+
+\newpage
+\input{aoa_overview}
+
+\bigskip
+
+\bigskip
+
+\input{aoa_components}
+
+\newpage
+
+\input{aoa_setup}
+
+\newpage
+
+\input{aoa_gameplay}
+\newpage
+
+\input{aoa_scoring}
+%
+%\input{submarine_movement_actions}
+%
+%\newpage
+%
+%\input{submarine_utility_actions}
+%
+%\newpage
+%
+%\input{submarine_objectives}
+%
+%\newpage
+%
+%\input{submarine_repair}
+%
+%\input{submarine_game_end}
+%
+%\newpage
+%
+%\input{submarine_example}
+%
+%\vfill
+%
+%\hrulefill
+%
+%{\footnotesize \textbf{Design}: Michael Purcell \hfill \textbf{Contact}:~\href{mailto:mike@armiger.games}{mike@armiger.games}}
+%
+\newpage
+\thispagestyle{empty}
+\phantom{a}
+\end{document}
