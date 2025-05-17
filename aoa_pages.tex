@@ -12,7 +12,7 @@
 \setmainfont[Scale=1.0]{Caslon Antique}
 \begin{center}
 \makeatletter
-{Version \@version}
+{\footnotesize Version \@version}
 \makeatother
 
 
@@ -53,38 +53,28 @@
 
 \newpage
 
+\input{aoa_characters}
+
+\newpage
+
 \input{aoa_gameplay}
+
 \newpage
 
 \input{aoa_scoring}
-%
-%\input{submarine_movement_actions}
-%
-%\newpage
-%
-%\input{submarine_utility_actions}
-%
-%\newpage
-%
-%\input{submarine_objectives}
-%
-%\newpage
-%
-%\input{submarine_repair}
-%
-%\input{submarine_game_end}
-%
-%\newpage
-%
-%\input{submarine_example}
-%
-%\vfill
-%
-%\hrulefill
-%
-%{\footnotesize \textbf{Design}: Michael Purcell \hfill \textbf{Contact}:~\href{mailto:mike@armiger.games}{mike@armiger.games}}
-%
+
+\vfill
+
+\hrulefill
+
+{\footnotesize \textbf{Design}: Michael Purcell \hfill \textbf{Contact}:~\href{mailto:mike@armiger.games}{mike@armiger.games}}
+
+\begin{tabular}{ll}
+\footnotesize{\doclicenseText} & \huge{\doclicenseIcon} \\
+\end{tabular}
+
 \newpage
-\thispagestyle{empty}
-\phantom{a}
+
+\input{aoa_scoring_summary}
+
 \end{document}

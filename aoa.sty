@@ -8,6 +8,8 @@
 \usetikzlibrary{math}
 \usetikzlibrary{shapes}
 \usetikzlibrary{calc}
+\usetikzlibrary{positioning}
+
 
 \usepackage{calc}
 \usepackage{fontspec}
@@ -38,7 +40,7 @@ Score two points for each stack of gold coins you have at the end of the game.
 }
 
 \newcommand{\rumtext}{
-Score a number of points based on how many bottles of rum you have at the end of the game.\\[1.5ex] \begin{center}\rumtable\end{center}
+Score points based on how many bottles of rum you have at the end of the game.\\[1.5ex] 0:0, 1:1, 2:4, 3:9, 4+:0.% \begin{center}\rumtable\end{center}
 }
 
 \newcommand{\rumtable}{
@@ -92,8 +94,9 @@ Before each round, give the parrot to another character.\\[1ex]Then, you may pee
 }
 
 \newcommand{\mermaidtext}{
-After each round, the mermaid steals one random treasure from the character who has the most stacks of gold coins.%bottles of rum.
+%After each round, the mermaid steals one random treasure from the character who has the most stacks of gold coins.%bottles of rum.
 %After each round, the mermaid steals one of bottle of rum from you.\\[1ex]Then, if any characters have more bottles of rum than you,\\give the mermaid to one of them.
+Before voting each round, give the mermaid to another character.\\[1ex]That character gets two votes this round and you get none.
 }
 
 \newcommand{\barreltext}{
@@ -221,7 +224,7 @@ You are the captain.\\[1ex]Each round, allocate shares to all characters before 
 
 		% Pattern for card front
 %		\node[draw, minimum width=2.5in, minimum height=3.5in, inner sep=0pt] at (0,0) {};
-		\node at (-1in, 1.5in) {{\Huge \textbf{#3}}};
+		\node at (-1in, 1.5in) {{\huge \textbf{#3}}};
 		\node[inner sep=0pt, anchor=south] () at (0,-0.8in) {\includegraphics[scale=0.125]{Images/#1}};
 		\node[draw, ultra thick, rounded corners=3mm, anchor=south, minimum height=0.675in, minimum width=2.25in, text width=2.0in, align=center] () at (0,-1.625in) {#2};
 	
@@ -230,8 +233,145 @@ You are the captain.\\[1ex]Each round, allocate shares to all characters before 
 		\pic () at (0,0) {cutguide={#4}};
 }}}
 
+\tikzset{pics/charactercard2/.style n args={4}{%
+	code={
+		\begin{scope}
+		\clip (-\cardwidth/2 - \bleed, 0in) --%
+		      (-\cardwidth/2 - \bleed, \cardheight/2 + \bleed) --%
+		      (\cardwidth/2 + \bleed, \cardheight/2 + \bleed) --%
+		      (\cardwidth/2 + \bleed, -\cardheight/2 - \bleed) --%
+		      (-\cardwidth/2 - \bleed, -\cardheight/2 - \bleed) --%
+		      cycle;
+		\path[fill=white] (-\cardwidth/2 - \bleed, 0in) --%
+		      (-\cardwidth/2 - \bleed, \cardheight/2 + \bleed) --%
+		      (\cardwidth/2 + \bleed, \cardheight/2 + \bleed) --%
+		      (\cardwidth/2 + \bleed, -\cardheight/2 - \bleed) --%
+		      (-\cardwidth/2 - \bleed, -\cardheight/2 - \bleed) --%
+		      cycle;
 
-\tikzset{pics/lootcard/.style n args={3}{%
+		% Pattern for card front
+%		\node[draw, minimum width=2.5in, minimum height=3.5in, inner sep=0pt] at (0,0) {};
+		\node at (-0.975in, 1.45in) {{\LARGE \textbf{#3}}};
+		\node[inner sep=0pt, anchor=south] () at (0,-0.675in) {\includegraphics[scale=0.115]{Images/#1}};
+		\node[draw, ultra thick, rounded corners=3mm, anchor=south, minimum height=0.675in, minimum width=2.25in, text width=2.0in, align=center] (b) at (0,-1.625in) {#2};
+	
+		\coordinate (x) at (0, 1.625in);
+		\coordinate[left = 1.125in of x] (xl);
+		\coordinate[right = 1.125in of x] (xr);
+
+		\coordinate[above = 0.125in of b] (y);
+		\coordinate[left = 1.125in of y] (yl);
+		\coordinate[right = 1.125in of y] (yr);
+
+		\path[draw, ultra thick, rounded corners=3mm] (x) -- (xr) -- (yr) -- (yl) -- (xl) -- cycle;
+
+		\end{scope}
+		% Cutting guides for corners of the cards	
+		\pic () at (0,0) {cutguide={#4}};
+}}}
+
+\tikzset{pics/lootcard/.style n args={4}{%
+	code={
+		\begin{scope}
+		\clip (-\cardwidth/2 - \bleed, 0in) --%
+		      (-\cardwidth/2 - \bleed, \cardheight/2 + \bleed) --%
+		      (\cardwidth/2 + \bleed, \cardheight/2 + \bleed) --%
+		      (\cardwidth/2 + \bleed, -\cardheight/2 - \bleed) --%
+		      (-\cardwidth/2 - \bleed, -\cardheight/2 - \bleed) --%
+		      cycle;
+		\path[fill=white] (-\cardwidth/2 - \bleed, 0in) --%
+		      (-\cardwidth/2 - \bleed, \cardheight/2 + \bleed) --%
+		      (\cardwidth/2 + \bleed, \cardheight/2 + \bleed) --%
+		      (\cardwidth/2 + \bleed, -\cardheight/2 - \bleed) --%
+		      (-\cardwidth/2 - \bleed, -\cardheight/2 - \bleed) --%
+		      cycle;
+
+		% Pattern for card front
+%		\node[draw, inner sep=0pt, minimum height=3.5in, minimum width=2.5in] at (0,0) {};
+		\node[inner sep=0pt] () at (0,0.25in) {\includegraphics[scale=0.25]{Images/#1}};
+		\node[draw, ultra thick, rounded corners=3mm, anchor=south, minimum height=0.675in, minimum width=2.25in, text width=2.0in, align=center] () at (0,-1.625in) {#2};
+		\node at (0in, 1.5in) {{\huge \textbf{#3}}};
+
+		\end{scope}
+		% Cutting guides for corners of the cards	
+		\pic () at (0,0) {cutguide={#4}};
+}}}
+
+\tikzset{pics/lootcard2/.style n args={4}{%
+	code={
+		\begin{scope}
+		\clip (-\cardwidth/2 - \bleed, 0in) --%
+		      (-\cardwidth/2 - \bleed, \cardheight/2 + \bleed) --%
+		      (\cardwidth/2 + \bleed, \cardheight/2 + \bleed) --%
+		      (\cardwidth/2 + \bleed, -\cardheight/2 - \bleed) --%
+		      (-\cardwidth/2 - \bleed, -\cardheight/2 - \bleed) --%
+		      cycle;
+		\path[fill=white] (-\cardwidth/2 - \bleed, 0in) --%
+		      (-\cardwidth/2 - \bleed, \cardheight/2 + \bleed) --%
+		      (\cardwidth/2 + \bleed, \cardheight/2 + \bleed) --%
+		      (\cardwidth/2 + \bleed, -\cardheight/2 - \bleed) --%
+		      (-\cardwidth/2 - \bleed, -\cardheight/2 - \bleed) --%
+		      cycle;
+
+		% Pattern for card front
+%		\node[draw, inner sep=0pt, minimum height=3.5in, minimum width=2.5in] at (0,0) {};
+		
+		\node[draw, ultra thick, rounded corners=3mm, anchor=north, minimum width=2.25in, text width=2.0in, align=center, text height=3ex] (b) at (0in, 1.625in) (a) {{\LARGE \textbf{#3}}};
+		\node[draw, ultra thick, rounded corners=3mm, anchor=south, minimum height=0.675in, minimum width=2.25in, text width=2.0in, align=center] (b) at (0,-1.625in) {#2};
+		\coordinate[below = 0.125in of a] (x);
+		\coordinate[left = 1.125in of x] (xl);
+		\coordinate[right = 1.125in of x] (xr);
+
+		\coordinate[above = 0.125in of b] (y);
+		\coordinate[left = 1.125in of y] (yl);
+		\coordinate[right = 1.125in of y] (yr);
+
+		\path[draw, ultra thick, rounded corners=3mm] (x) -- (xr) -- (yr) -- (yl) -- (xl) -- cycle;
+		
+		\coordinate (z) at ($(x)!0.5!(y)$);
+		\node at (z) {\includegraphics[scale=0.25]{Images/#1}};
+
+		\end{scope}
+		% Cutting guides for corners of the cards	
+		\pic () at (0,0) {cutguide={#4}};
+}}}
+
+\tikzset{pics/rolecard2/.style n args={3}{%
+	code={
+		\begin{scope}
+		\clip (-\cardwidth/2 - \bleed, 0in) --%
+		      (-\cardwidth/2 - \bleed, \cardheight/2 + \bleed) --%
+		      (\cardwidth/2 + \bleed, \cardheight/2 + \bleed) --%
+		      (\cardwidth/2 + \bleed, -\cardheight/2 - \bleed) --%
+		      (-\cardwidth/2 - \bleed, -\cardheight/2 - \bleed) --%
+		      cycle;
+		\path[fill=white] (-\cardwidth/2 - \bleed, 0in) --%
+		      (-\cardwidth/2 - \bleed, \cardheight/2 + \bleed) --%
+		      (\cardwidth/2 + \bleed, \cardheight/2 + \bleed) --%
+		      (\cardwidth/2 + \bleed, -\cardheight/2 - \bleed) --%
+		      (-\cardwidth/2 - \bleed, -\cardheight/2 - \bleed) --%
+		      cycle;
+
+		% Pattern for card front
+		\node[inner sep=0pt] () at (0,0.5in) {\includegraphics[scale=0.25]{Images/#1}};
+		\node[draw, ultra thick, rounded corners=3mm, anchor=south, minimum height=0.675in, minimum width=2.25in, text width=2.0in, align=center] (b) at (0,-1.625in) {#2};
+
+		\coordinate (x) at (0, 1.625in);
+		\coordinate[left = 1.125in of x] (xl);
+		\coordinate[right = 1.125in of x] (xr);
+
+		\coordinate[above = 0.125in of b] (y);
+		\coordinate[left = 1.125in of y] (yl);
+		\coordinate[right = 1.125in of y] (yr);
+
+		\path[draw, ultra thick, rounded corners=3mm] (x) -- (xr) -- (yr) -- (yl) -- (xl) -- cycle;
+
+		\end{scope}
+		% Cutting guides for corners of the cards	
+		\pic () at (0,0) {cutguide={#3}};
+}}}
+
+\tikzset{pics/rolecard/.style n args={3}{%
 	code={
 		\begin{scope}
 		\clip (-\cardwidth/2 - \bleed, 0in) --%
@@ -250,11 +390,12 @@ You are the captain.\\[1ex]Each round, allocate shares to all characters before 
 		% Pattern for card front
 		\node[inner sep=0pt] () at (0,0.5in) {\includegraphics[scale=0.25]{Images/#1}};
 		\node[draw, ultra thick, rounded corners=3mm, anchor=south, minimum height=0.675in, minimum width=2.25in, text width=2.0in, align=center] () at (0,-1.625in) {#2};
-	
+
 		\end{scope}
 		% Cutting guides for corners of the cards	
 		\pic () at (0,0) {cutguide={#3}};
 }}}
+
 
 \tikzset{pics/uniformcard/.style n args={2}{
 	code={
